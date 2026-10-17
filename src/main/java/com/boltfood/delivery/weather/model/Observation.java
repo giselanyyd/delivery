@@ -1,5 +1,6 @@
 package com.boltfood.delivery.weather.model;
 
+import com.boltfood.delivery.fee.model.City;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -16,24 +17,33 @@ public class Observation {
     @GeneratedValue (strategy = GenerationType.UUID)
     private UUID id;
 
+    private long observationsTimestamp;
+
     private String stationName;
 
-    private String stationWmoCode;
+    @Enumerated(EnumType.STRING)
+    private City city;
 
-    private String airTemperature;
+    private Integer stationWmoCode;
 
-    private String windSpeed;
+    private Double airTemperature;
+
+    private Double windSpeed;
 
     private String weatherPhenomenon;
 
     public Observation(
+            long observationsTimestamp,
             String stationName,
-            String stationWmoCode,
-            String airTemperature,
-            String windSpeed,
+            City city,
+            Integer stationWmoCode,
+            Double airTemperature,
+            Double windSpeed,
             String weatherPhenomenon
     ) {
+        this.observationsTimestamp = observationsTimestamp;
         this.stationName = stationName;
+        this.city = city;
         this.stationWmoCode = stationWmoCode;
         this.airTemperature = airTemperature;
         this.windSpeed = windSpeed;
