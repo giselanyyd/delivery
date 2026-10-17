@@ -25,7 +25,7 @@ public class WeatherService {
         "Tallinn-Harku", City.TALLINN,
         "Tartu-Tõravere", City.TARTU,
         "Pärnu", City.PÄRNU
-);
+    );
 
     public WeatherService(WeatherRepository weatherRepository) {
         this.weatherRepository = weatherRepository;
