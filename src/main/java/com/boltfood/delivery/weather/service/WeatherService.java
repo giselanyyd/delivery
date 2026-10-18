@@ -35,7 +35,7 @@ public class WeatherService {
         parseData(WEATHER_URL);
     }
 
-    public void parseData(String url) {
+    private void parseData(String url) {
 
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
