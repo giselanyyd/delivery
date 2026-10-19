@@ -1,4 +1,4 @@
-package com.boltfood.delivery.fee.model;
+package com.boltfood.delivery.common;
 
 public enum City {
     TALLINN,

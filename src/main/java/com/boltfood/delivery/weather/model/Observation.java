@@ -1,6 +1,6 @@
 package com.boltfood.delivery.weather.model;
 
-import com.boltfood.delivery.fee.model.City;
+import com.boltfood.delivery.common.City;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;

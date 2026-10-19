@@ -1,8 +1,10 @@
 package com.boltfood.delivery.fee.controller;
-import com.boltfood.delivery.fee.model.City;
+import com.boltfood.delivery.common.City;
 import com.boltfood.delivery.fee.model.VehicleType;
 import com.boltfood.delivery.fee.service.FeeService;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/v1/fee")
@@ -15,7 +17,7 @@ public class FeeController {
     }
 
     @GetMapping
-    public double getDeliveryFee(@RequestParam City city, @RequestParam VehicleType vehicleType){
+    public BigDecimal getDeliveryFee(@RequestParam City city, @RequestParam VehicleType vehicleType){
         return feeService.getDeliveryFee(city, vehicleType);
     }
 }

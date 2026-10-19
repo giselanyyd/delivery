@@ -3,8 +3,10 @@ package com.boltfood.delivery.fee.controller;
 import com.boltfood.delivery.fee.dto.RegionalBaseFeeCondition;
 import com.boltfood.delivery.fee.model.RegionalBaseFee;
 import com.boltfood.delivery.fee.service.RegionalBaseFeeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,16 +31,18 @@ public class RegionalBaseFeeController {
     }
 
     @PostMapping
-    public void postRegionalBaseFee(@RequestBody RegionalBaseFeeCondition condition){
+    @ResponseStatus(HttpStatus.CREATED)
+    public void postRegionalBaseFee(@Valid @RequestBody RegionalBaseFeeCondition condition){
         regionalBaseFeeService.postRbf(condition);
     }
 
     @PutMapping("/{id}")
-    public void putRegionalBaseFee (@PathVariable UUID id, @RequestBody RegionalBaseFeeCondition condition){
+    public void putRegionalBaseFee (@PathVariable UUID id, @Valid @RequestBody RegionalBaseFeeCondition condition){
         regionalBaseFeeService.putRbf(id, condition);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRegionalBaseFee(@PathVariable UUID id){
         regionalBaseFeeService.deleteRbfById(id);
     }
