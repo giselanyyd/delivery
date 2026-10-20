@@ -1,4 +1,4 @@
-package com.boltfood.delivery.weather.model;
+package com.boltfood.delivery.fee.model;
 
 import java.util.Arrays;
 import java.util.Optional;

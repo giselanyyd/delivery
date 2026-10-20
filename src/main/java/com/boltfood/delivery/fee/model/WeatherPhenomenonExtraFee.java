@@ -1,6 +1,5 @@
 package com.boltfood.delivery.fee.model;
 
-import com.boltfood.delivery.weather.model.Phenomenon;
 import jakarta.persistence.*;
 import lombok.Data;
 

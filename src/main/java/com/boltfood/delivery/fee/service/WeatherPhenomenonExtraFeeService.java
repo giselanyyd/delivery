@@ -4,7 +4,7 @@ import com.boltfood.delivery.exception.DuplicateConditionException;
 import com.boltfood.delivery.exception.EntityNotFoundException;
 import com.boltfood.delivery.exception.VehicleTypeUsageForbiddenException;
 import com.boltfood.delivery.fee.model.VehicleType;
-import com.boltfood.delivery.weather.model.Phenomenon;
+import com.boltfood.delivery.fee.model.Phenomenon;
 import com.boltfood.delivery.fee.model.WeatherPhenomenonExtraFee;
 import com.boltfood.delivery.fee.dto.WeatherPhenomenonExtraFeeCondition;
 import com.boltfood.delivery.fee.repository.WeatherPhenomenonExtraFeeRepository;

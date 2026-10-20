@@ -1,7 +1,7 @@
 package com.boltfood.delivery.fee.dto;
 
 import com.boltfood.delivery.fee.model.VehicleType;
-import com.boltfood.delivery.weather.model.Phenomenon;
+import com.boltfood.delivery.fee.model.Phenomenon;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;

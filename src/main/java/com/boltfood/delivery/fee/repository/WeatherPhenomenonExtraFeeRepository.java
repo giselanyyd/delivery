@@ -1,7 +1,7 @@
 package com.boltfood.delivery.fee.repository;
 
 import com.boltfood.delivery.fee.model.VehicleType;
-import com.boltfood.delivery.weather.model.Phenomenon;
+import com.boltfood.delivery.fee.model.Phenomenon;
 import com.boltfood.delivery.fee.model.WeatherPhenomenonExtraFee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
