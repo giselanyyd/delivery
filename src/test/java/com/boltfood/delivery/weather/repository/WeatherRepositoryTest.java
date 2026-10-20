@@ -44,7 +44,7 @@ class WeatherRepositoryTest {
 
     @Test
     void findFirstByCity_noObservations_returnsEmpty() {
-        Optional<Observation> result = weatherRepository.findFirstByCityOrderByObservationsTimestampDesc(City.PÄRNU);
+        Optional<Observation> result = weatherRepository.findFirstByCityOrderByObservationsTimestampDesc(City.PARNU);
 
         assertThat(result).isEmpty();
     }

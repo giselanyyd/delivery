@@ -38,7 +38,7 @@ class FeeServiceTest {
             "TALLINN, SCOOTER, 3.5, 1, 4.5",
             "TALLINN, BIKE, 3, 1, 4",
             "TARTU, BIKE, 2.5, 1, 3.5",
-            "PÄRNU, SCOOTER, 2.5, 1, 3.5"
+            "PARNU, SCOOTER, 2.5, 1, 3.5"
     })
     void getDeliveryFee_returnsTotalFee(City city, VehicleType vehicleType, String baseFee, String weatherFee, String expectedTotal) {
         when(regionalBaseFeeService.getRegionalBaseFee(city, vehicleType)).thenReturn(new BigDecimal(baseFee));

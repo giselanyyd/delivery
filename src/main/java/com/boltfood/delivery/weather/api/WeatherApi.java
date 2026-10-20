@@ -25,7 +25,7 @@ public class WeatherApi {
     private static final Map<String, City> STATION_CITIES = Map.of(
         "Tallinn-Harku", City.TALLINN,
         "Tartu-Tõravere", City.TARTU,
-        "Pärnu", City.PÄRNU
+        "Pärnu", City.PARNU
     );
 
     public List<Observation> getWeatherFromApi(){

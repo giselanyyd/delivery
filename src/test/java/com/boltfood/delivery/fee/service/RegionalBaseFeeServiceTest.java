@@ -50,10 +50,10 @@ class RegionalBaseFeeServiceTest {
 
     @Test
     void getRegionalBaseFee_notFound_throwsException() {
-        when(regionalBaseFeeRepository.findByCityAndVehicleType(City.PÄRNU, VehicleType.BIKE)).thenReturn(Optional.empty());
+        when(regionalBaseFeeRepository.findByCityAndVehicleType(City.PARNU, VehicleType.BIKE)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class,
-                () -> regionalBaseFeeService.getRegionalBaseFee(City.PÄRNU, VehicleType.BIKE));
+                () -> regionalBaseFeeService.getRegionalBaseFee(City.PARNU, VehicleType.BIKE));
     }
 
     @Test

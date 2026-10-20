@@ -59,15 +59,15 @@ class FeeControllerTest {
 
     @Test
     void getDeliveryFeeWhenRegionalBaseFeeIsNotSet_returnsNotFound() throws Exception {
-        when(feeService.getDeliveryFee(City.PÄRNU, VehicleType.SCOOTER, null))
-                .thenThrow(new EntityNotFoundException("Regional base fee not found for PÄRNU and SCOOTER"));
+        when(feeService.getDeliveryFee(City.PARNU, VehicleType.SCOOTER, null))
+                .thenThrow(new EntityNotFoundException("Regional base fee not found for PARNU and SCOOTER"));
 
         mockMvc.perform(get(URL)
-                        .param("city", "PÄRNU")
+                        .param("city", "PARNU")
                         .param("vehicleType", "SCOOTER"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status").value(404))
-                .andExpect(jsonPath("$.message").value("Regional base fee not found for PÄRNU and SCOOTER"));
+                .andExpect(jsonPath("$.message").value("Regional base fee not found for PARNU and SCOOTER"));
     }
 
     @Test

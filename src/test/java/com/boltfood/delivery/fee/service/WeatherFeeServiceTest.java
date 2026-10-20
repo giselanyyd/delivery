@@ -59,13 +59,13 @@ class WeatherFeeServiceTest {
 
     @Test
     void getWeatherConditionsExtraFeeWhenForbidden_throwsException() {
-        Observation observation = new Observation(1792511767, "Pärnu", City.PÄRNU, 26242, 5.0, 25.0, "Light snow shower");
-        when(weatherService.getObservation(City.PÄRNU)).thenReturn(observation);
+        Observation observation = new Observation(1792511767, "Pärnu", City.PARNU, 26242, 5.0, 25.0, "Light snow shower");
+        when(weatherService.getObservation(City.PARNU)).thenReturn(observation);
         when(windSpeedExtraFeeService.getWsefByVehicleTypeAndWindSpeed(VehicleType.BIKE, 25.0))
                 .thenThrow(new VehicleTypeUsageForbiddenException("Usage of selected vehicle type is forbidden"));
 
         assertThrows(VehicleTypeUsageForbiddenException.class,
-                () -> weatherFeeService.getWeatherConditionsExtraFee(City.PÄRNU, VehicleType.BIKE, null));
+                () -> weatherFeeService.getWeatherConditionsExtraFee(City.PARNU, VehicleType.BIKE, null));
     }
 
     @Test
