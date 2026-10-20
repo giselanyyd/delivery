@@ -7,6 +7,9 @@ import com.boltfood.delivery.weather.model.Observation;
 import com.boltfood.delivery.weather.repository.WeatherRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 @Slf4j
@@ -29,5 +32,13 @@ public class WeatherService {
     public Observation getObservation(City city){
         return weatherRepository.findFirstByCityOrderByObservationsTimestampDesc(city)
                 .orElseThrow(() -> new EntityNotFoundException("No weather data found for " + city));
+    }
+
+    public Observation getObservation(City city, LocalDateTime timestamp){
+
+        long dateInSeconds = timestamp.atZone(ZoneId.of("Europe/Tallinn")).toEpochSecond();
+
+        return weatherRepository.findFirstByCityAndObservationsTimestampLessThanEqualOrderByObservationsTimestampDesc(city, dateInSeconds)
+                .orElseThrow(() -> new EntityNotFoundException("No weather data found for " + city + " at " + timestamp));
     }
 }

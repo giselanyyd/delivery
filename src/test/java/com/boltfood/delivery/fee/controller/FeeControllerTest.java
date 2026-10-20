@@ -30,7 +30,7 @@ class FeeControllerTest {
 
     @Test
     void getDeliveryFee_returnsFee() throws Exception {
-        when(feeService.getDeliveryFee(City.TALLINN, VehicleType.CAR)).thenReturn(new BigDecimal("4.50"));
+        when(feeService.getDeliveryFee(City.TALLINN, VehicleType.CAR, null)).thenReturn(new BigDecimal("4.50"));
 
         mockMvc.perform(get(URL)
                         .param("city", "TALLINN")
@@ -38,12 +38,12 @@ class FeeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("4.50"));
 
-        verify(feeService).getDeliveryFee(City.TALLINN, VehicleType.CAR);
+        verify(feeService).getDeliveryFee(City.TALLINN, VehicleType.CAR, null);
     }
 
     @Test
     void getDeliveryFeeWhenUsageIsForbidden_returnsBadRequest() throws Exception {
-        when(feeService.getDeliveryFee(City.TARTU, VehicleType.BIKE))
+        when(feeService.getDeliveryFee(City.TARTU, VehicleType.BIKE, null))
                 .thenThrow(new VehicleTypeUsageForbiddenException("Usage of selected vehicle type is forbidden"));
 
         mockMvc.perform(get(URL)
@@ -54,12 +54,12 @@ class FeeControllerTest {
                 .andExpect(jsonPath("$.error").value("Vehicle usage forbidden"))
                 .andExpect(jsonPath("$.message").value("Usage of selected vehicle type is forbidden"));
 
-        verify(feeService).getDeliveryFee(City.TARTU, VehicleType.BIKE);
+        verify(feeService).getDeliveryFee(City.TARTU, VehicleType.BIKE, null);
     }
 
     @Test
     void getDeliveryFeeWhenRegionalBaseFeeIsNotSet_returnsNotFound() throws Exception {
-        when(feeService.getDeliveryFee(City.PÄRNU, VehicleType.SCOOTER))
+        when(feeService.getDeliveryFee(City.PÄRNU, VehicleType.SCOOTER, null))
                 .thenThrow(new EntityNotFoundException("Regional base fee not found for PÄRNU and SCOOTER"));
 
         mockMvc.perform(get(URL)

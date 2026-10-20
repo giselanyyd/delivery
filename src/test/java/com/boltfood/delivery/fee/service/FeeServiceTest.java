@@ -2,6 +2,7 @@ package com.boltfood.delivery.fee.service;
 
 import com.boltfood.delivery.common.City;
 import com.boltfood.delivery.exception.EntityNotFoundException;
+import com.boltfood.delivery.exception.InvalidTimestampException;
 import com.boltfood.delivery.fee.model.VehicleType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -39,13 +42,13 @@ class FeeServiceTest {
     })
     void getDeliveryFee_returnsTotalFee(City city, VehicleType vehicleType, String baseFee, String weatherFee, String expectedTotal) {
         when(regionalBaseFeeService.getRegionalBaseFee(city, vehicleType)).thenReturn(new BigDecimal(baseFee));
-        when(weatherFeeService.getWeatherConditionsExtraFee(city, vehicleType)).thenReturn(new BigDecimal(weatherFee));
+        when(weatherFeeService.getWeatherConditionsExtraFee(city, vehicleType, null)).thenReturn(new BigDecimal(weatherFee));
 
-        BigDecimal result = feeService.getDeliveryFee(city, vehicleType);
+        BigDecimal result = feeService.getDeliveryFee(city, vehicleType, null);
 
         assertThat(result).isEqualByComparingTo(expectedTotal);
         verify(regionalBaseFeeService).getRegionalBaseFee(city, vehicleType);
-        verify(weatherFeeService).getWeatherConditionsExtraFee(city, vehicleType);
+        verify(weatherFeeService).getWeatherConditionsExtraFee(city, vehicleType, null);
     }
 
     @Test
@@ -53,8 +56,18 @@ class FeeServiceTest {
         when(regionalBaseFeeService.getRegionalBaseFee(City.TARTU, VehicleType.CAR))
                 .thenThrow(new EntityNotFoundException("Regional base fee not found for TARTU and CAR"));
 
-        assertThrows(EntityNotFoundException.class, () -> feeService.getDeliveryFee(City.TARTU, VehicleType.CAR));
+        assertThrows(EntityNotFoundException.class, () -> feeService.getDeliveryFee(City.TARTU, VehicleType.CAR, null));
 
         verifyNoInteractions(weatherFeeService);
+    }
+
+    @Test
+    void getDeliveryFeeWithFutureTimestamp_throwsException() {
+        LocalDateTime future = LocalDateTime.now(ZoneId.of("Europe/Tallinn")).plusDays(1);
+
+        assertThrows(InvalidTimestampException.class,
+                () -> feeService.getDeliveryFee(City.TALLINN, VehicleType.CAR, future));
+
+        verifyNoInteractions(regionalBaseFeeService, weatherFeeService);
     }
 }

@@ -51,7 +51,7 @@ class WeatherFeeServiceTest {
         when(weatherPhenomenonExtraFeeService.getWpefByVehicleTypeAndPhenomenon(vehicleType, "Light snow shower")).thenReturn(new BigDecimal(phenomenonFee));
         when(airTemperatureExtraFeeService.getAtefByVehicleTypeAndAirTemperature(vehicleType, -10.1)).thenReturn(new BigDecimal(temperatureFee));
 
-        BigDecimal result = weatherFeeService.getWeatherConditionsExtraFee(City.TARTU, vehicleType);
+        BigDecimal result = weatherFeeService.getWeatherConditionsExtraFee(City.TARTU, vehicleType, null);
 
         assertThat(result).isEqualByComparingTo(expectedTotal);
         verify(weatherService).getObservation(City.TARTU);
@@ -65,7 +65,7 @@ class WeatherFeeServiceTest {
                 .thenThrow(new VehicleTypeUsageForbiddenException("Usage of selected vehicle type is forbidden"));
 
         assertThrows(VehicleTypeUsageForbiddenException.class,
-                () -> weatherFeeService.getWeatherConditionsExtraFee(City.PÄRNU, VehicleType.BIKE));
+                () -> weatherFeeService.getWeatherConditionsExtraFee(City.PÄRNU, VehicleType.BIKE, null));
     }
 
     @Test
@@ -73,7 +73,7 @@ class WeatherFeeServiceTest {
         when(weatherService.getObservation(City.TALLINN)).thenThrow(new EntityNotFoundException("No weather data found for TALLINN"));
 
         assertThrows(EntityNotFoundException.class,
-                () -> weatherFeeService.getWeatherConditionsExtraFee(City.TALLINN, VehicleType.CAR));
+                () -> weatherFeeService.getWeatherConditionsExtraFee(City.TALLINN, VehicleType.CAR, null));
 
         verifyNoInteractions(windSpeedExtraFeeService, weatherPhenomenonExtraFeeService, airTemperatureExtraFeeService);
     }

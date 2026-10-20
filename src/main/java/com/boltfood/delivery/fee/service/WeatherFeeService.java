@@ -7,6 +7,7 @@ import com.boltfood.delivery.weather.service.WeatherService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 public class WeatherFeeService {
@@ -23,9 +24,15 @@ public class WeatherFeeService {
         this.airTemperatureExtraFeeService = airTemperatureExtraFeeService;
     }
 
-    public BigDecimal getWeatherConditionsExtraFee(City city, VehicleType vehicleType) {
+    public BigDecimal getWeatherConditionsExtraFee(City city, VehicleType vehicleType, LocalDateTime timestamp) {
 
-        Observation observation = weatherService.getObservation(city);
+        Observation observation;
+        if (timestamp == null) {
+            observation = weatherService.getObservation(city);
+        }
+        else {
+            observation = weatherService.getObservation(city, timestamp);
+        }
         return windSpeedExtraFeeService.getWsefByVehicleTypeAndWindSpeed(vehicleType, observation.getWindSpeed())
                 .add(weatherPhenomenonExtraFeeService.getWpefByVehicleTypeAndPhenomenon(vehicleType, observation.getWeatherPhenomenon())
                         .add(airTemperatureExtraFeeService.getAtefByVehicleTypeAndAirTemperature(vehicleType, observation.getAirTemperature())));
