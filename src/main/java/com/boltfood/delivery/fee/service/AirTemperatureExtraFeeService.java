@@ -20,6 +20,14 @@ public class AirTemperatureExtraFeeService {
         this.airTemperatureExtraFeeRepository = airTemperatureExtraFeeRepository;
     }
 
+    /**
+     * Returns the air temperature extra fee from the first rule whose range
+     * contains the given temperature.
+     *
+     * @param vehicleType    the courier's vehicle type
+     * @param airTemperature the observed air temperature in °C, may be {@code null}
+     * @return the matching rule's fee, or zero if the temperature is {@code null} or no rule matches
+     */
     public BigDecimal getAtefByVehicleTypeAndAirTemperature(VehicleType vehicleType, Double airTemperature) {
         if (airTemperature == null) {
             return BigDecimal.ZERO;

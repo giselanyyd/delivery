@@ -20,6 +20,12 @@ public enum Phenomenon {
         this.phenomenonTypes = Set.of(phenomenonTypes);
     }
 
+    /**
+     * Maps a weather phenomenon description from the weather service to its category.
+     *
+     * @param phenomenonType the description, e.g. "Light snow shower", may be {@code null}
+     * @return the matching category, or empty if the description is {@code null} or unknown
+     */
     public static Optional<Phenomenon> getPhenomenon(String phenomenonType) {
         if (phenomenonType == null) return Optional.empty();
         return Arrays.stream(values())

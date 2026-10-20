@@ -20,6 +20,12 @@ public class WeatherPhenomenonExtraFeeController {
         this.weatherPhenomenonExtraFeeService = weatherPhenomenonExtraFeeService;
     }
 
+    /**
+     * Returns the regional base fee with the given ID.
+     *
+     * @param id the rule ID
+     * @return the regional base fee
+     */
     @GetMapping("/{id}")
     public WeatherPhenomenonExtraFee getWeatherPhenomenonExtraFeeById(@PathVariable UUID id){
         return weatherPhenomenonExtraFeeService.getWpefById(id);

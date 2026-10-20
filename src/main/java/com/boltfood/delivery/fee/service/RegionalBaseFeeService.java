@@ -22,6 +22,14 @@ public class RegionalBaseFeeService {
         this.regionalBaseFeeRepository = regionalBaseFeeRepository;
     }
 
+    /**
+     * Returns the regional base fee for the given city and vehicle type.
+     *
+     * @param city        the delivery city
+     * @param vehicleType the courier's vehicle type
+     * @return the base fee
+     * @throws EntityNotFoundException if no base fee is configured for the combination
+     */
     public BigDecimal getRegionalBaseFee(City city, VehicleType vehicleType){
         Optional<RegionalBaseFee> regionalBaseFee = regionalBaseFeeRepository.findByCityAndVehicleType(city, vehicleType);
 

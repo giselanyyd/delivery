@@ -11,6 +11,9 @@ public class GetWeatherJob {
 
     private final WeatherService weatherService;
 
+    /**
+     * Imports weather data on the schedule set by {@code get-weather.job.cron}.
+     */
     @Scheduled(cron = "${get-weather.job.cron}")
     public void getWeather(){
         weatherService.getWeather();

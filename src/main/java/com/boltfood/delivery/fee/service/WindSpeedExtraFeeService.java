@@ -20,7 +20,15 @@ public class WindSpeedExtraFeeService {
     public WindSpeedExtraFeeService(WindSpeedExtraFeeRepository windSpeedExtraFeeRepository){
         this.windSpeedExtraFeeRepository = windSpeedExtraFeeRepository;
     }
-
+    /**
+     * Returns the wind speed extra fee from the first rule whose range
+     * contains the given wind speed.
+     *
+     * @param vehicleType the courier's vehicle type
+     * @param windSpeed   the observed wind speed in m/s, may be {@code null}
+     * @return the matching rule's fee, or zero if the wind speed is {@code null} or no rule matches
+     * @throws VehicleTypeUsageForbiddenException if the matching rule forbids the vehicle type
+     */
     public BigDecimal getWsefByVehicleTypeAndWindSpeed(VehicleType vehicleType, Double windSpeed) {
         if (windSpeed == null) {
             return BigDecimal.ZERO;

@@ -19,6 +19,15 @@ public class FeeController {
         this.feeService = feeService;
     }
 
+    /**
+     * Returns the total delivery fee for the given city and vehicle type.
+     *
+     * @param city        the delivery city
+     * @param vehicleType the courier's vehicle type
+     * @param timestamp   optional point in time to use weather data from;
+     *                    if omitted, the latest weather data is used
+     * @return the total delivery fee
+     */
     @GetMapping
     public BigDecimal getDeliveryFee(@RequestParam City city, @RequestParam VehicleType vehicleType, @RequestParam(required = false) LocalDateTime timestamp){
         return feeService.getDeliveryFee(city, vehicleType, timestamp);

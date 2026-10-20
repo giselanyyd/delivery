@@ -23,6 +23,15 @@ public class WeatherPhenomenonExtraFeeService {
         this.weatherPhenomenonExtraFeeRepository = weatherPhenomenonExtraFeeRepository;
     }
 
+    /**
+     * Returns the weather phenomenon extra fee for the given vehicle type.
+     * The phenomenon text from the weather service is first mapped to a {@link Phenomenon} category.
+     *
+     * @param vehicleType the courier's vehicle type
+     * @param phenomenon  the phenomenon description from the weather service, may be {@code null}
+     * @return the rule's fee, or zero if the phenomenon is unknown, {@code null} or has no rule
+     * @throws VehicleTypeUsageForbiddenException if the matching rule forbids the vehicle type
+     */
     public BigDecimal getWpefByVehicleTypeAndPhenomenon(VehicleType vehicleType, String phenomenon){
         Optional<Phenomenon> value = Phenomenon.getPhenomenon(phenomenon);
         if(value.isPresent()){

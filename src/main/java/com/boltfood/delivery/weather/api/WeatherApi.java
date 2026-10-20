@@ -28,6 +28,13 @@ public class WeatherApi {
         "Pärnu", City.PARNU
     );
 
+    /**
+     * Fetches current observations from the Estonian Environment Agency and returns
+     * those from the Tallinn-Harku, Tartu-Tõravere and Pärnu stations.
+     *
+     * @return the observations for the supported stations
+     * @throws WeatherApiException if the data can't be fetched or parsed
+     */
     public List<Observation> getWeatherFromApi(){
         Document document = fetchData();
         return parseData(document);
